@@ -9,6 +9,7 @@ class fg:
   cyan = "\u001b[36m"
   white = "\u001b[37m"
   reset = "\u001b[0m"
+notwhanet = []
 banner = f"""{fg.yellow}
 
   _____                 _                   _____    _               _____                           _             
@@ -42,16 +43,26 @@ def logic():
     else:
         raise f"{fg.red}Unexpectd error, status code: " + res.status_code + fg.reset
 def generate():
+    
     import os
     os.system("cls" if os.name == "nt" else "clear")
     print(banner)
     idea = logic()
+    if idea in notwhanet:
+        generate()
     print(idea)
     print(f"\n\n{fg.yellow}Do you want to do this idea or choose other?{fg.reset} \n{fg.yellow}[{fg.reset}1{fg.yellow}] Use This Idea \n{fg.yellow}[{fg.reset}2{fg.yellow}] Choose Another Idea{fg.reset}:")
     choice = input()
     if choice == "1":
         print(f"{fg.magenta} Go on using this!{fg.reset}")
     else:
+        title=idea.split("\n")
+        
+        title = title[1].replace("Title: ", "")
+        
+        
+        notwhanet.append(title)
+        
         generate()
 def main():
     import os
